@@ -54,11 +54,11 @@ def create_person(name):
     connection.close()
     return
 
-def get_persons():
+def get_people():
     connection = dbapi2.connect(dsn)
     cursor = connection.cursor()
     
-    statement = """SELECT PERSON_ID, NAME FROM CUSTOMER           
+    statement = """SELECT PERSON_ID, NAME FROM PERSON           
                         """
     cursor.execute(statement)
     people = cursor.fetchall()

@@ -9,31 +9,33 @@ def create_tables():
     
     statement = """CREATE TABLE PERSON(
                         PERSON_ID SERIAL PRIMARY KEY,
-                        NAME VARCHAR(50)
-                        );
-                   CREATE TABLE USER(
-                        USER_ID PRIMARY KEY FOREIGN KEY REFERENCES TO PERSON(PERSON_ID)
-                        );
-                   CREATE TABLE ADMIN(
-                        ADMIN_ID PRIMARY KEY FOREIGN KEY REFERENCES TO PERSON(PERSON_ID)
-                        );
-                   CREATE TABLE EXPERT(
-                        EXPERT_ID PRIMARY KEY FOREIGN KEY REFERENCES TO PERSON(PERSON_ID)
+                        NAME VARCHAR(50),
+                        PASSWORD VARCHAR(10),
+                        TYPE VARCHAR(6),
+                        DATE DATE,
                         );
                    CREATE TABLE COMMENTS(
                         COMMENT_ID SERIAL PRIMARY KEY,
-                        WHICH_ID INTEGER REFERENCES PERSON(PERSON_ID),
+                        COMMENT_WHICH_ID INTEGER REFERENCES PERSON(PERSON_ID),
                         COMMENT VARCHAR(100000),
                         COMMENT_TOPIC VARCHAR(1000);
-                        COM_DATE DATE,  
-                        )
+                        COMMENT_DATE DATE,  
+                        );
                     CREATE TABLE ESSAYS(
                         ESSAY_ID SERIAL PRIMARY KEY,
-                        WHICH_ID INTEGER FOREIGN KEY REFERENCES TO EXPERT(EXPERT_ID),
+                        ESSAY_WHICH_ID INTEGER FOREIGN KEY REFERENCES TO PERSON(PERSON_ID),
                         ESSAY_HEADER VARCHAR(1000);
                         ESSAY VARCHAR(100000000),
-                        ES_DATE DATE,
-                    );              
+                        ESSAY_DATE DATE,
+                    );    
+                    CREATE TABLE ANNOUNCEMENTS(
+                        ANNOUNCEMENT_ID SERIAL PRIMARY KEY,
+                        ANNOUNCEMENT_HEADER VARCHAR(1000),
+                        ANNOUNCEMENT VARCHAR(1000000),
+                        ANNOUNCEMENT_WHICH_ID INTEGER FOREIGN KEY REFERENCES TO PERSON(PERSON_ID),
+                        ANNOUNCEMENT_DATE DATE,          
+                    );
+                    
                         """
     cursor.execute(statement)
     connection.commit()

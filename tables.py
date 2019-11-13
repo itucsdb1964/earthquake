@@ -6,7 +6,7 @@ dsn = """user='postgres' password='docker'
 def create_tables():
     connection = dbapi2.connect(dsn)
     cursor = connection.cursor()
-    
+    # Earthquakes and old earthquake tables will be added
     statement = """CREATE TABLE PERSON(
                         PERSON_ID SERIAL PRIMARY KEY,
                         NAME VARCHAR(50),

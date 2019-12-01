@@ -1,6 +1,6 @@
 import psycopg2 as dbapi2
 
-dsn = """user='postgres' password='docker'
+dsn = """user='postgres' password='1864'
          host='localhost' port=5432 dbname='postgres'"""
 
 def create_tables():
@@ -12,30 +12,29 @@ def create_tables():
                         NAME VARCHAR(50),
                         PASSWORD VARCHAR(10),
                         TYPE VARCHAR(6),
-                        DATE DATE,
-                        );
+                        PERSON_DATE DATE
+                    );
                    CREATE TABLE COMMENTS(
                         COMMENT_ID SERIAL PRIMARY KEY,
                         COMMENT_WHICH_ID INTEGER REFERENCES PERSON(PERSON_ID),
                         COMMENT VARCHAR(100000),
-                        COMMENT_TOPIC VARCHAR(1000);
-                        COMMENT_DATE DATE,  
-                        );
+                        COMMENT_TOPIC VARCHAR(1000),
+                        COMMENT_DATE DATE  
+                    );
                     CREATE TABLE ESSAYS(
                         ESSAY_ID SERIAL PRIMARY KEY,
-                        ESSAY_WHICH_ID INTEGER FOREIGN KEY REFERENCES TO PERSON(PERSON_ID),
-                        ESSAY_HEADER VARCHAR(1000);
-                        ESSAY VARCHAR(100000000),
-                        ESSAY_DATE DATE,
+                        ESSAY_WHICH_ID INTEGER REFERENCES PERSON(PERSON_ID),
+                        ESSAY_HEADER VARCHAR(1000),
+                        ESSAY VARCHAR(10000000),
+                        ESSAY_DATE DATE
                     );    
                     CREATE TABLE ANNOUNCEMENTS(
                         ANNOUNCEMENT_ID SERIAL PRIMARY KEY,
                         ANNOUNCEMENT_HEADER VARCHAR(1000),
                         ANNOUNCEMENT VARCHAR(1000000),
-                        ANNOUNCEMENT_WHICH_ID INTEGER FOREIGN KEY REFERENCES TO PERSON(PERSON_ID),
-                        ANNOUNCEMENT_DATE DATE,          
+                        ANNOUNCEMENT_WHICH_ID INTEGER REFERENCES PERSON(PERSON_ID),
+                        ANNOUNCEMENT_DATE DATE         
                     );
-                    
                         """
     cursor.execute(statement)
     connection.commit()
@@ -117,3 +116,9 @@ def delete_comments(id, check):
     cursor.close()
     connection.close()
     return
+
+#def create_eartquakes():
+#    connection = dbapi2.connect(dsn)
+#    cursor = connection.cursor()
+
+#    statement = 

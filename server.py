@@ -1,4 +1,6 @@
-from flask import Flask
+from datetime import datetime
+
+from flask import Flask, render_template
 
 
 app = Flask(__name__)
@@ -6,7 +8,13 @@ app = Flask(__name__)
 
 @app.route("/")
 def home_page():
-    return "My movie collection"
+    today = datetime.today()
+    day_name = today.strftime("%A")
+    return render_template("home.html", aaa = "to be connected",day=day_name)
+
+@app.route("/movies")
+def movies_page():
+    return "many comments will be added"
 
 
 if __name__ == "__main__":

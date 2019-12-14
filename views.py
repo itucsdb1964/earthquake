@@ -1,7 +1,27 @@
 import pyodbc
 from datetime import datetime
 
-from flask import current_app, render_template,request,redirect,url_for
+from flask import current_app, render_template, request, redirect, url_for, session, flash
+
+from tables import database as d
+from flask_session import Session
+
+
+### convertTuple ###
+import functools 
+import operator  
+
+#### login_page ###
+#from passlib.apps import custom_app_context as hasher
+from passlib.hash import pbkdf2_sha256
+
+from forms import LoginForm
+from user import get_user
+from flask_login import LoginManager, login_user, logout_user
+
+def convertTuple(tup): 
+    str = functools.reduce(operator.add, (tup)) 
+    return str
 
 def add_earthquake_page():
     if request.method == "GET":
@@ -31,6 +51,8 @@ def add_comment_page():
         print(form_comment)
         return redirect(url_for("add_comment_page"))
 
+    
+    
 def earthquakes_page():
     return "bbb"
 
@@ -41,3 +63,49 @@ def home_page():
 
 def comments_page():
     return "aaaaa"
+
+def make_comment_page():   
+    topic = request.args.get("topic")
+    comment = request.args.get("comment")
+    name = session.get('user_id', 'not set')
+    db = current_app.config["db"]
+    user_id = db.get_user_id(name)
+    db.create_comment(topic, comment, user_id)
+    next_page = request.args.get("next", url_for("comment_page"))
+    render_template("makecomment.html")
+    flash("Comment is succesfully sent :)")
+    return redirect(next_page)
+    
+def signup_page():
+    form = LoginForm()
+    if form.validate_on_submit():
+        username = form.data["username"]
+        password = form.data["password"]
+        next_page = request.args.get("next", url_for("login_page"))
+        db = current_app.config["db"]
+        db.create_person(username, pbkdf2_sha256.hash(password))
+        flash("You signed up, you can enjoy our website now :)")
+        return redirect(next_page)
+    flash("Invalid credentials.")
+    return render_template("signup.html", form=form)
+
+def login_page():
+    form = LoginForm()
+    if form.validate_on_submit():
+        username = form.data["username"]
+        user = get_user(username)
+        if user is not None:
+            password = form.data["password"]
+            if pbkdf2_sha256.verify(password, user.password[0][0] ):
+                login_user(user)
+                flash("You have logged in.")
+                next_page = request.args.get("next", url_for("home_page"))
+                return redirect(next_page)
+        flash("Invalid credentials.")
+    return render_template("login.html", form=form)
+
+def logout_page():
+    logout_user()
+    flash("You have logged out.")
+    return redirect(url_for("home_page"))
+

@@ -34,12 +34,14 @@ from tables import database
 lm = LoginManager()
 
 
+app = Flask(__name__)
+
 @lm.user_loader
 def load_user(user_id):
     return get_user(user_id)
     
 def create_app():
-    app = Flask(__name__)
+    
     app.config.from_object("settings")
 
     app.add_url_rule("/", view_func=views.home_page)

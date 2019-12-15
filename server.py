@@ -1,44 +1,48 @@
+from flask import Flask, session
 
-from datetime import datetime
-
-from flask import current_app, render_template, request, redirect, url_for, session, flash
-
-from tables import database as d
+import views
 from flask_session import Session
 
+from flask_login import LoginManager
+from user import get_user
 
+from tables import database
 
-from datetime import datetime
-
-from flask import Flask, render_template
+lm = LoginManager()
 
 
 app = Flask(__name__)
 
+@lm.user_loader
+def load_user(user_id):
+    return get_user(user_id)
+    
+def create_app():
+    
+    app.config.from_object("settings")
 
-@app.route("/")
-def home_page():
-    today = datetime.today()
-    day_name = today.strftime("%A")
-    return render_template("home.html", day=day_name)
+    app.add_url_rule("/", view_func=views.home_page)
+    app.add_url_rule("/signup", view_func=views.signup_page, methods=["GET", "POST"])
+    app.add_url_rule("/login", view_func=views.login_page, methods=["GET", "POST"])
+    app.add_url_rule("/logout", view_func=views.logout_page)
+    app.add_url_rule("/makecomment", view_func=views.make_comment_page,methods=["GET", "POST"])
+    app.add_url_rule("/comments", view_func=views.comments_page)
+    app.add_url_rule("/earthquakes", view_func=views.earthquakes_page)
+    app.add_url_rule("/new_earthquake", view_func=views.add_earthquake_page, methods=["GET", "POST"])
+    app.add_url_rule("/new_comment", view_func=views.add_comment_page, methods=["GET", "POST"])
+    app.config["DEBUG"] = True
+    lm.init_app(app)
+    lm.login_view = "login_page"
+
+    db = database()
+    app.config["db"] = db
+
+    Session(app)
 
 
-@app.route("/new_earthquake")
-def add_earthquake_page():
-    if request.method == "GET":
-        return render_template("add_earthquake.html")
-    else:
-        form_agency = request.form["agency"]
-        form_date_time = request.form["date_time"]
-        form_latitude = request.form["latitude"]
-        form_longitude = request.form["longitude"]
+    return app
 
-        print(form_agency)
-        print(form_date_time)
-        print(form_latitude)
-        print(form_longitude)
-        return redirect(url_for("add_earthquake_page"))
-
-
+    
 if __name__ == "__main__":
-    app.run( debug=True, port=8080)
+    app = create_app()
+    app.run()

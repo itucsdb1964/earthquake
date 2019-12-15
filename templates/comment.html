@@ -4,18 +4,22 @@
     <h1 class="title">Comments</h1>
 
     {% if comments %}
-    <table class="d-inline-block">
+    <form action="" method="post" name="comment_list">
+      <table class="table is-striped is-fullwidth">
       {% for comment in comments %}
-        {% for item in comment %}
-        <tr class="d-inline-block">
-            <td class="d-inline-block">
-                <label class="checkbox">
-                    <input type="checkbox" name="comment" value="{{ comment }}"/>
-                </label>
-            {{ item }}
+        <tr>
+            <td>
+              {% if current_user.username == comment[0] %}
+              <label class="checkbox" >
+                  <input type="checkbox" name="deletes" value="{{ comment[2] }}"/>
+              </label>
+                {% endif %}
+                  {{comment[3]}}
+                  {{comment[0]}}
+                  {{comment[1]}}
+                  {{comment[2]}}
             </td>
         </tr>
-        {% endfor %}
       {% endfor %}
       <div class="field is-grouped">
         <div class="control">
@@ -23,5 +27,6 @@
         </div>
       </div>
     </table>
+  </form>
     {% endif %}
 {% endblock %}

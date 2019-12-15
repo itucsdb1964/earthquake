@@ -1,4 +1,5 @@
 import psycopg2 as dbapi2
+from datetime import datetime
 
 dsn = """user='postgres' password='1864'
          host='localhost' port=5432 dbname='postgres'"""
@@ -97,10 +98,13 @@ class database:
         connection = dbapi2.connect(dsn)
         cursor = connection.cursor()
         
-        statement = """INSERT INTO PERSON (NAME, PASSWORD, TYPE)
-                        VALUES ( %s, %s, %s)            
+        today = datetime.today()
+        print(today)
+        
+        statement = """INSERT INTO PERSON (NAME, PASSWORD, TYPE, PERSON_DATE)
+                        VALUES ( %s, %s, %s, %s)            
                             """
-        cursor.execute(statement, [name, password, "user"])
+        cursor.execute(statement, [name, password, "user", today])
         connection.commit()
         cursor.close()
         connection.close()
@@ -196,11 +200,13 @@ class database:
     def create_comment(self, header, comment, which):
         connection = dbapi2.connect(dsn)
         cursor = connection.cursor()
+
+        today = datetime.today()
         
-        statement = """INSERT INTO COMMENTS (COMMENT_TOPIC, COMMENT, COMMENT_WHICH_ID)
-                        VALUES ( %s, %s, %s)            
+        statement = """INSERT INTO COMMENTS (COMMENT_TOPIC, COMMENT, COMMENT_WHICH_ID, COMMENT_DATE)
+                        VALUES ( %s, %s, %s, %s)            
                             """
-        cursor.execute(statement, [header, comment, which])
+        cursor.execute(statement, [header, comment, which, today])
         connection.commit()
         cursor.close()
         connection.close()

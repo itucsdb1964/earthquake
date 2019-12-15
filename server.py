@@ -30,7 +30,6 @@ def create_app():
     app.add_url_rule("/comments", view_func=views.comments_page)
     app.add_url_rule("/earthquakes", view_func=views.earthquakes_page)
     app.add_url_rule("/new_earthquake", view_func=views.add_earthquake_page, methods=["GET", "POST"])
-    app.add_url_rule("/new_comment", view_func=views.add_comment_page, methods=["GET", "POST"])
     app.add_url_rule("/signout", view_func=views.signout_page)
     app.config["DEBUG"] = True
     lm.init_app(app)

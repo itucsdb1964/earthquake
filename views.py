@@ -59,6 +59,38 @@ def earthquakes_page():
     return render_template("earthquakes.html", earths = earths)
 
 ####################################
+########## essay pages ##############
+
+def make_essay_page():   
+    if request.method =="GET":
+        return render_template("makeessay.html")
+    else:
+        topic = request.form["topic"]
+        essay = request.form["essay"]
+        print(essay)
+        print(topic)
+        name = session.get('user_id', 'not set')
+        db = current_app.config["db"]
+        user_id = db.get_user_id(name)
+        print(user_id[0])
+        db.create_essay(topic, essay, user_id[0][0])
+        #next_page = request.args.get("next", url_for("comments_page"))
+        #render_template("makecomment.html")
+        flash("essay is succesfully published :)")
+        return redirect(url_for("make_essay_page"))
+
+def essays_page():
+    db = current_app.config["db"]
+    essays = db.get_essay()
+    i = 0
+    for essay in essays:
+        essays[i] = list(essays[i])
+        essays[i][0] = db.get_person(essay[0])[0][0]
+        i = i + 1
+    return render_template("essay.html", essays = essays)
+
+
+####################################
 ########## comment pages ###########
 
 

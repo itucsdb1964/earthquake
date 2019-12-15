@@ -54,7 +54,13 @@ def add_comment_page():
     
     
 def earthquakes_page():
-    return "bbb"
+    db = current_app.config["db"]
+    earths = db.get_earthquakes(0, 0)
+    i = 0
+    for earth in earths:
+        earths[i] = list(earths[i])
+        i = i + 1
+    return render_template("earthquakes.html", earths = earths)
 
 def home_page():
     today = datetime.today()

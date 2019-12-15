@@ -17,7 +17,7 @@ class database:
                     DROP TABLE ESSAYS;
                     DROP TABLE ANNOUNCEMENTS;
                     DROP TABLE PERSON;
-                    DROP EARTHQUAKES;
+                    DROP TABLE EARTHQUAKES;
                     DROP TABLE OLD_EARTHQUAKES; 
                     """
         cursor.execute(statement)

@@ -148,6 +148,19 @@ class database:
         connection.close()
         return user_id
 
+    def get_person(self, id):
+        connection = dbapi2.connect(dsn)
+        cursor = connection.cursor()
+        
+        statement = """SELECT NAME FROM PERSON
+                    WHERE( PERSON_ID = (%(id)s))           
+                            """
+        cursor.execute(statement, {'id' : id})
+        person = cursor.fetchall()
+        cursor.close()
+        connection.close()
+        return person
+
     def get_people(self):
         connection = dbapi2.connect(dsn)
         cursor = connection.cursor()
@@ -223,6 +236,20 @@ class database:
                             """
 
         cursor.execute(statement, {'id' : id})
+        comments = cursor.fetchall()
+        connection.commit()
+        cursor.close()
+        connection.close()
+        return comments
+
+    def get_comments(self):
+        connection = dbapi2.connect(dsn)
+        cursor = connection.cursor()
+
+        statement = """SELECT COMMENT_WHICH_ID, COMMENT_TOPIC, COMMENT, COMMENT_DATE FROM COMMENTS
+                            """
+
+        cursor.execute(statement)
         comments = cursor.fetchall()
         connection.commit()
         cursor.close()

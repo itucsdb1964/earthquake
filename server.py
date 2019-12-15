@@ -51,7 +51,7 @@ def create_app():
     app.add_url_rule("/earthquakes", view_func=views.earthquakes_page)
     app.add_url_rule("/new_earthquake", view_func=views.add_earthquake_page, methods=["GET", "POST"])
     app.add_url_rule("/new_comment", view_func=views.add_comment_page, methods=["GET", "POST"])
-    #app.config["DEBUG"] = True
+    app.config["DEBUG"] = True
     lm.init_app(app)
     lm.login_view = "login_page"
 
@@ -66,4 +66,4 @@ def create_app():
 
 if __name__ == "__main__":
     app = create_app()
-    app.run(debug=True,port=8080)
+    app.run()

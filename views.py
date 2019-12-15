@@ -93,17 +93,23 @@ def essays_page():
 ####################################
 ########## comment pages ###########
 
-
-    
 def comments_page():
     db = current_app.config["db"]
-    comments = db.get_comments()
-    i = 0
-    for comment in comments:
-        comments[i] = list(comments[i])
-        comments[i][0] = db.get_person(comment[0])[0][0]
-        i = i + 1
-    return render_template("comment.html", comments = comments)
+    if request.method == "GET":
+        comments = db.get_comments()
+        i = 0
+        for comment in comments:
+            comments[i] = list(comments[i])
+            comments[i][0] = db.get_person(comment[0])[0][0]
+            i = i + 1
+        return render_template("comment.html", comments = comments)    
+    else:
+        form_comment_keys = request.form.getlist("deletes")
+        print(form_comment_keys)
+        for form_comment_key in form_comment_keys:
+            db.delete_comments(db.get_comment_id(form_comment_key)[0][0], 1)
+        flash("You deleted some of your comments")
+        return redirect(url_for("comments_page"))
 
 def make_comment_page():   
     if request.method =="GET":

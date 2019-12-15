@@ -4,7 +4,7 @@ from datetime import datetime
 from flask import current_app, render_template, request, redirect, url_for, session, flash
 
 from tables import database as d
-#from flask_session import Session
+from flask_session import Session
 
 
 ### convertTuple ###

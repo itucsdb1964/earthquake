@@ -105,7 +105,6 @@ def comments_page():
         return render_template("comment.html", comments = comments)    
     else:
         form_comment_keys = request.form.getlist("deletes")
-        print(form_comment_keys)
         for form_comment_key in form_comment_keys:
             db.delete_comments(db.get_comment_id(form_comment_key)[0][0], 1)
         flash("You deleted some of your comments")
@@ -122,18 +121,12 @@ def make_comment_page():
         name = session.get('user_id', 'not set')
         db = current_app.config["db"]
         user_id = db.get_user_id(name)
-        print(user_id[0])
         db.create_comment(topic, comment, user_id[0][0])
         #next_page = request.args.get("next", url_for("comments_page"))
         #render_template("makecomment.html")
         flash("Comment is succesfully sent :)")
         return redirect(url_for("make_comment_page"))
 
-def delete_comment_page():
-    db = current_app.config["db"]
-    
-    db.delete_comment()
-    return
 ####################################
 ######### log in/out pages #########
 

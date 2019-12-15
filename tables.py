@@ -276,7 +276,7 @@ class database:
         connection = dbapi2.connect(dsn)
         cursor = connection.cursor()
         
-        statement = """INSERT INTO ESSAYS (ESSAY_TOPIC, ESSAY, ESSAY_WHICH_ID)
+        statement = """INSERT INTO ESSAYS (ESSAY_HEADER, ESSAY, ESSAY_WHICH_ID)
                         VALUES ( %s, %s, %s)            
                             """
         cursor.execute(statement, [header, essay, which])
@@ -306,25 +306,41 @@ class database:
         connection.close()
         return
 
-    def get_essay(self, id, check):
+
+    def get_essay(self):
         connection = dbapi2.connect(dsn)
         cursor = connection.cursor()
 
-        if(check == 0):
-            statement = """SELECT * FROM ESSAYS
-                        WHERE ( ESSAY_WHICH_ID = (%(id)s) )
-                            """
-        else:
-            statement = """SELECT * FROM ESSAYS
-                        WHERE ( ESSAY_ID = (%(id)s) )
+        statement = """SELECT ESSAY_WHICH_ID,ESSAY_HEADER, ESSAY, ESSAY_DATE FROM ESSAYS
                             """
 
-        cursor.execute(statement, {'id' : id})
+        cursor.execute(statement)
         essays = cursor.fetchall()
         connection.commit()
         cursor.close()
         connection.close()
         return essays
+
+
+   # def get_essay(self, id, check):
+    #    connection = dbapi2.connect(dsn)
+     #   cursor = connection.cursor()
+
+#        if(check == 0):
+ #           statement = """SELECT * FROM ESSAYS
+  #                      WHERE ( ESSAY_WHICH_ID = (%(id)s) )
+   #                         """
+    #    else:
+     #       statement = """SELECT * FROM ESSAYS
+      #                  WHERE ( ESSAY_ID = (%(id)s) )
+       #                     """
+
+        #cursor.execute(statement, {'id' : id})
+        #essays = cursor.fetchall()
+       # connection.commit()
+        #cursor.close()
+        #connection.close()
+        #return essays
 
     ###################################
     ######### earthquakes #############

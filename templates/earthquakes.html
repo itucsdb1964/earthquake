@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block title %}Earthquake list{% endblock %}
+{% block content %}
+    <h1 class="title">Earthquakes</h1>
+
+    {% if earths %}
+    <table class="d-inline-block">
+      {% for e in earths %}
+        {% for item in e %}
+        <tr class="d-inline-block">
+            <td class="d-inline-block">
+            {{ item }}
+            </td>
+        </tr>
+        {% endfor %}
+      {% endfor %}
+    </table>
+    {% endif %}
+{% endblock %}

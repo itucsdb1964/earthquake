@@ -51,6 +51,9 @@
               <span class="navbar-item">
                 <a class="button is-link" href="{{ url_for('comments_page') }}">List comments</a>
               </span>
+              <span class="navbar-item">
+                <a class="button is-link" href="{{ url_for('essays_page') }}">List essays</a>
+              </span>
               {% endif %}
               <span class="navbar-item">
               {% if not current_user.is_authenticated %}

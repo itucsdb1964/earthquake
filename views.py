@@ -65,16 +65,22 @@ def comments_page():
     return "aaaaa"
 
 def make_comment_page():   
-    topic = request.args.get("topic")
-    comment = request.args.get("comment")
-    name = session.get('user_id', 'not set')
-    db = current_app.config["db"]
-    user_id = db.get_user_id(name)
-    db.create_comment(topic, comment, user_id)
-    next_page = request.args.get("next", url_for("comment_page"))
-    render_template("makecomment.html")
-    flash("Comment is succesfully sent :)")
-    return redirect(next_page)
+    if request.method =="GET":
+        return render_template("makecomment.html")
+    else:
+        topic = request.form["topic"]
+        comment = request.form["comment"]
+        print(comment)
+        print(topic)
+        name = session.get('user_id', 'not set')
+        db = current_app.config["db"]
+        user_id = db.get_user_id(name)
+        print(user_id[0])
+        db.create_comment(topic, comment, user_id[0][0])
+        #next_page = request.args.get("next", url_for("comments_page"))
+        #render_template("makecomment.html")
+        flash("Comment is succesfully sent :)")
+        return redirect(url_for("make_comment_page"))
     
 def signup_page():
     form = LoginForm()

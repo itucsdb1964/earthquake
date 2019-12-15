@@ -139,7 +139,7 @@ class database:
         connection = dbapi2.connect(dsn)
         cursor = connection.cursor()
         
-        statement = """SELECT USER_ID FROM PERSON
+        statement = """SELECT PERSON_ID FROM PERSON
                     WHERE( NAME = (%(id)s) )           
                             """
         cursor.execute(statement, {'id' : name})

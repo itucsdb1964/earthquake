@@ -61,18 +61,7 @@ def earthquakes_page():
 ####################################
 ########## comment pages ###########
 
-def add_comment_page():
-    if request.method =="GET":
-        return render_template("add_comment.html")
-    else:
-        form_id = request.form["id"]
-        form_topic = request.form["topic"]
-        form_comment = request.form["comment"]
 
-        print(form_id)
-        print(form_topic)
-        print(form_comment)
-        return redirect(url_for("add_comment_page"))
     
 def comments_page():
     db = current_app.config["db"]

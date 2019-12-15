@@ -25,11 +25,13 @@ def create_app():
     app.add_url_rule("/signup", view_func=views.signup_page, methods=["GET", "POST"])
     app.add_url_rule("/login", view_func=views.login_page, methods=["GET", "POST"])
     app.add_url_rule("/logout", view_func=views.logout_page)
+    app.add_url_rule("/deletecomment", view_func=views.delete_comment_page)
     app.add_url_rule("/makecomment", view_func=views.make_comment_page,methods=["GET", "POST"])
     app.add_url_rule("/comments", view_func=views.comments_page)
     app.add_url_rule("/earthquakes", view_func=views.earthquakes_page)
     app.add_url_rule("/new_earthquake", view_func=views.add_earthquake_page, methods=["GET", "POST"])
     app.add_url_rule("/new_comment", view_func=views.add_comment_page, methods=["GET", "POST"])
+    app.add_url_rule("/signout", view_func=views.signout_page)
     app.config["DEBUG"] = True
     lm.init_app(app)
     lm.login_view = "login_page"

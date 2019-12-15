@@ -62,7 +62,14 @@ def home_page():
     return render_template("home.html", day=day_name)
 
 def comments_page():
-    return "aaaaa"
+    db = current_app.config["db"]
+    comments = db.get_comments()
+    i = 0
+    for comment in comments:
+        comments[i] = list(comments[i])
+        comments[i][0] = db.get_person(comment[0])[0][0]
+        i = i + 1
+    return render_template("comment.html", comments = comments)
 
 def make_comment_page():   
     if request.method =="GET":

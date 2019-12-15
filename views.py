@@ -23,6 +23,17 @@ def convertTuple(tup):
     str = functools.reduce(operator.add, (tup)) 
     return str
 
+####################################
+############ home page #############
+
+def home_page():
+    today = datetime.today()
+    day_name = today.strftime("%A")
+    return render_template("home.html", day=day_name)
+
+####################################
+######### earthquake pages #########
+
 def add_earthquake_page():
     if request.method == "GET":
         return render_template("add_earthquake.html")
@@ -38,6 +49,18 @@ def add_earthquake_page():
         print(form_longitude)
         return redirect(url_for("add_earthquake_page"))
 
+def earthquakes_page():
+    db = current_app.config["db"]
+    earths = db.get_earthquakes(0, 0)
+    i = 0
+    for earth in earths:
+        earths[i] = list(earths[i])
+        i = i + 1
+    return render_template("earthquakes.html", earths = earths)
+
+####################################
+########## comment pages ###########
+
 def add_comment_page():
     if request.method =="GET":
         return render_template("add_comment.html")
@@ -50,23 +73,7 @@ def add_comment_page():
         print(form_topic)
         print(form_comment)
         return redirect(url_for("add_comment_page"))
-
     
-    
-def earthquakes_page():
-    db = current_app.config["db"]
-    earths = db.get_earthquakes(0, 0)
-    i = 0
-    for earth in earths:
-        earths[i] = list(earths[i])
-        i = i + 1
-    return render_template("earthquakes.html", earths = earths)
-
-def home_page():
-    today = datetime.today()
-    day_name = today.strftime("%A")
-    return render_template("home.html", day=day_name)
-
 def comments_page():
     db = current_app.config["db"]
     comments = db.get_comments()
@@ -94,7 +101,15 @@ def make_comment_page():
         #render_template("makecomment.html")
         flash("Comment is succesfully sent :)")
         return redirect(url_for("make_comment_page"))
+
+def delete_comment_page():
+    db = current_app.config["db"]
     
+    db.delete_comment()
+    return
+####################################
+######### log in/out pages #########
+
 def signup_page():
     form = LoginForm()
     if form.validate_on_submit():
@@ -107,6 +122,14 @@ def signup_page():
         return redirect(next_page)
     flash("Invalid credentials.")
     return render_template("signup.html", form=form)
+
+def signout_page():
+    db = current_app.config["db"]
+    name = session.get('user_id', 'not set')
+    user_id = db.get_user_id(name)
+    db.delete_person(user_id[0][0])
+    flash("You are no longer a user of this site :(")
+    return redirect(url_for("home_page"))
 
 def login_page():
     form = LoginForm()

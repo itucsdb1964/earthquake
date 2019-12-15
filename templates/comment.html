@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block title %}Comment list{% endblock %}
+{% block content %}
+    <h1 class="title">Comments</h1>
+
+    {% if comments %}
+    <table class="d-inline-block">
+      {% for comment in comments %}
+        {% for item in comment %}
+        <tr class="d-inline-block">
+            <td class="d-inline-block">
+            {{ item }}
+            </td>
+        </tr>
+        {% endfor %}
+      {% endfor %}
+    </table>
+    {% endif %}
+{% endblock %}

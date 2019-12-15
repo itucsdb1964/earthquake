@@ -60,17 +60,21 @@ class database:
                             ANNOUNCEMENT_DATE DATE         
                         );
                         CREATE TABLE EARTHQUAKES(
-                            EARTHQUAKE_ID NUMERIC PRIMARY KEY,
-                            TIMEUTC VARCHAR(100),
-                            LATITUDE NUMERIC(7,4),
-                            LONGTITUDE NUMERIC(7,4),
-                            DEPTH NUMERIC(6,2),
-                            SOURCE_NO INTEGER,
-                            SOURCE1 VARCHAR(100),
-                            TYPE VARCHAR(100),
-                            MAGNITUDE NUMERIC(3,1),
-                            SOURCE_NO2 NUMERIC,
-                            SOURCE2 VARCHAR(100)
+                            EVENTID INTEGER PRIMARY KEY,
+                            AGENCY VARCHAR(100),
+                            DATE_TIME VARCHAR(100),
+                            LATITUDE FLOAT,
+                            LONGITUDE FLOAT,
+                            DEPTH FLOAT,
+                            RMS FLOAT,
+                            KIND VARCHAR(100),
+                            MAGNITUDE FLOAT,
+                            COUNTR VARCHAR(100),
+                            CITY VARCHAR(100),
+                            VILLAGE VARCHAR(100),
+                            OTHER1 VARCHAR(100),
+                            OTHER2 VARCHAR(100),
+                            OTHER3 VARCHAR(100)
                         );
                         CREATE TABLE OLD_EARTHQUAKES(
                             EARTHQUAKE_ID NUMERIC PRIMARY KEY,

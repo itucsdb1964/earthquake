@@ -103,7 +103,7 @@ class database:
         cursor = connection.cursor()
         
         today = datetime.today()
-        print(today)
+
         
         statement = """INSERT INTO PERSON (NAME, PASSWORD, TYPE, PERSON_DATE)
                         VALUES ( %s, %s, %s, %s)            
@@ -173,7 +173,7 @@ class database:
         connection = dbapi2.connect(dsn)
         cursor = connection.cursor()
         
-        statement = """SELECT PASSWORD, NAME FROM PERSON           
+        statement = """SELECT PASSWORD, NAME, PERSON_DATE FROM PERSON           
                             """
         cursor.execute(statement)
         people = cursor.fetchall()
@@ -185,13 +185,15 @@ class database:
         connection = dbapi2.connect(dsn)
         cursor = connection.cursor()
         
+        database.delete_comments(self, id, 0)
+        database.delete_essays(self, id, 0)
+        
         statement = """DELETE FROM PERSON
                         WHERE ( PERSON_ID = (%(id)s) )           
                             """
 
         cursor.execute(statement, {'id' : id})
-        check = 0
-        database.delete_comments(self, id, check)
+
         connection.commit()
         cursor.close()
         connection.close()
@@ -251,7 +253,7 @@ class database:
         cursor.close()
         connection.close()
         return comments
-
+    
     def get_comments(self):
         connection = dbapi2.connect(dsn)
         cursor = connection.cursor()

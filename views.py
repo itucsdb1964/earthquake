@@ -63,7 +63,7 @@ def earthquakes_page():
 ####### announcements pages ########
 
 def make_announcement_page():
-    if request.method =="GET":
+    if request.method == "GET":
         return render_template("makeannouncement.html")
     else:
         header = request.form["header"]
@@ -80,13 +80,20 @@ def make_announcement_page():
 
 def announcements_page():
     db = current_app.config["db"]
-    announcements = db.get_announcement()
-    i = 0
-    for announcement in announcements:
-        announcements[i] = list(announcements[i])
-        announcements[i][0] = db.get_person(announcement[0])[0][0]
-        i = i + 1
-    return render_template("announcement.html", announcements = announcements)
+    if request.method == "GET":
+        announcements = db.get_announcement()
+        i = 0
+        for announcement in announcements:
+            announcements[i] = list(announcements[i])
+            announcements[i][0] = db.get_person(announcement[0])[0][0]
+            i = i + 1
+        return render_template("announcement.html", announcements = announcements)
+    else:
+        form_announcement_keys = request.form.getlist("deletes")
+        for form_announcement_key in form_announcement_keys:
+            db.delete_announcements(db.get_announcement_id(form_announcement_key)[0][0],1)
+            flash("You deletede some of your announcements")
+            return redirect(url_for("announcements_page"))
 
 
 ####################################
@@ -112,13 +119,20 @@ def make_essay_page():
 
 def essays_page():
     db = current_app.config["db"]
-    essays = db.get_essay()
-    i = 0
-    for essay in essays:
-        essays[i] = list(essays[i])
-        essays[i][0] = db.get_person(essay[0])[0][0]
-        i = i + 1
-    return render_template("essay.html", essays = essays)
+    if request.method == "GET":
+        essays = db.get_essay()
+        i = 0
+        for essay in essays:
+            essays[i] = list(essays[i])
+            essays[i][0] = db.get_person(essay[0])[0][0]
+            i = i + 1
+        return render_template("essay.html", essays = essays)
+    else:
+        form_essay_keys = request.form.getlist("deletes")
+        for form_essay_key in form_essay_keys:
+            db.delete_essays(db.get_essay_id(form_essay_key)[0][0],1)
+            flash("You deletede some of you essays")
+            return redirect(url_for("essays_page"))
 
 
 ####################################

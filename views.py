@@ -59,6 +59,36 @@ def earthquakes_page():
     return render_template("earthquakes.html", earths = earths)
 
 ####################################
+####### announcements pages ########
+
+def make_announcement_page():
+    if request.method =="GET":
+        return render_template("makeannouncement.html")
+    else:
+        header = request.form["header"]
+        announcement = request.form["announcement"]
+        print(header)
+        print(announcement)
+        name = session.get('user_id', 'not set')
+        db = current_app.config["db"]
+        user_id = db.get_user_id(name)
+        print(user_id[0])
+        db.create_announcement(header, announcement, user_id[0][0])
+        flash("announcement is succesfully announced :)")
+        return redirect(url_for("make_announcement_page"))
+
+def announcements_page():
+    db = current_app.config["db"]
+    announcements = db.get_announcement()
+    i = 0
+    for announcement in announcements:
+        announcements[i] = list(announcements[i])
+        announcements[i][0] = db.get_person(announcement[0])[0][0]
+        i = i + 1
+    return render_template("announcement.html", announcements = announcements)
+
+
+####################################
 ########## essay pages ##############
 
 def make_essay_page():   

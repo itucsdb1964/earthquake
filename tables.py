@@ -97,8 +97,8 @@ class database:
 
     ######### PERSON METHODS ##########
 
-    def create_person(self, name, password):
-        connection = dbapi2.connect(url)
+    def create_person(self, name, password, type = 'user'):
+        connection = dbapi2.connect(dsn)
         cursor = connection.cursor()
         
         today = datetime.today()
@@ -107,7 +107,7 @@ class database:
         statement = """INSERT INTO PERSON (NAME, PASSWORD, TYPE, PERSON_DATE)
                         VALUES ( %s, %s, %s, %s)            
                             """
-        cursor.execute(statement, [name, password, "user", today])
+        cursor.execute(statement, [name, password, type, today])
         connection.commit()
         cursor.close()
         connection.close()

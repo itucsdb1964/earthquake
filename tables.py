@@ -1,7 +1,7 @@
 import psycopg2 as dbapi2
 from datetime import datetime
 
-dsn = """user='postgres' password='1864'
+dsn = """user='postgres' password='muzipos1'
          host='localhost' port=5432 dbname='postgres'"""
 
 class database:
@@ -267,6 +267,39 @@ class database:
         cursor.close()
         connection.close()
         return comments
+
+    ###############################
+
+    ##### ANNOUNCEMENT METHODS ####
+
+    def create_announcement(self,header,announcement,which):
+        connection = dbapi2.connect(dsn)
+        cursor = connection.cursor()
+
+        statement = """ INSERT INTO ANNOUNCEMENTS (ANNOUNCEMENT_HEADER, ANNOUNCEMENT, ANNOUNCEMENT_WHICH_ID)
+                            VALUES ( %s, %s, %s)
+                                """
+        cursor.execute(statement, [header, announcement, which])
+        connection.commit()
+        cursor.close()
+        connection.close()
+        return
+
+    def get_announcement(self):
+        connection = dbapi2.connect(dsn)
+        cursor = connection.cursor()
+
+        statement = """SELECT ANNOUNCEMENT_WHICH_ID,ANNOUNCEMENT_HEADER, ANNOUNCEMENT, ANNOUNCEMENT_DATE FROM ANNOUNCEMENTS
+                            """
+
+        cursor.execute(statement)
+        announcements = cursor.fetchall()
+        connection.commit()
+        cursor.close()
+        connection.close()
+        return announcements
+
+    
 
     ###############################
 

@@ -60,7 +60,7 @@ class database:
                             ANNOUNCEMENT_DATE DATE         
                         );
                         CREATE TABLE EARTHQUAKES(
-                            EVENTID INTEGER PRIMARY KEY,
+                            EVENTID SERIAL PRIMARY KEY,
                             AGENCY VARCHAR(100),
                             DATE_TIME VARCHAR(100),
                             LATITUDE FLOAT,

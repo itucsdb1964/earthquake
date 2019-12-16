@@ -4,6 +4,7 @@
     <h1 class="title">Earthquakes</h1>
 
     {% if earths %}
+    <form action="" method="post" name="earth_list">
     <table style="border-collapse: collapse; width: 90%">
       <tr style="background-color: rgb(127, 240, 123)">
       <th style="border-bottom: 1px solid rgb(78, 42, 42); text-align: left;  padding: 15px">
@@ -56,6 +57,11 @@
         
         <tr style="background-color: rgb(187, 253, 170)">
           <td style="border-bottom: 1px solid rgb(78, 42, 42); height: 20px; vertical-align: bottom; padding: 15px; text-align: left">
+            {% if current_user.is_admin %}
+            <label class="checkbox" >
+                <input type="checkbox" name="deletes" value="{{ e[0] }}"/>
+            </label>
+            {% endif %}
             {{ e[0] }}
           </td>
           <td style="border-bottom: 1px solid rgb(78, 42, 42); height: 20px; vertical-align: bottom; padding: 15px; text-align: left">
@@ -102,6 +108,12 @@
           </td>                                                                                                                                                                                            
         </tr>
       {% endfor %}
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-danger is-small">Delete</button>
+        </div>
+      </div>
     </table>
+  </form>
     {% endif %}
 {% endblock %}

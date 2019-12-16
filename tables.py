@@ -97,7 +97,7 @@ class database:
 
     ######### PERSON METHODS ##########
 
-    def create_person(self, name, password, type = 'user'):
+    def create_person(self, name, password):
         connection = dbapi2.connect(url)
         cursor = connection.cursor()
         
@@ -107,7 +107,7 @@ class database:
         statement = """INSERT INTO PERSON (NAME, PASSWORD, TYPE, PERSON_DATE)
                         VALUES ( %s, %s, %s, %s)            
                             """
-        cursor.execute(statement, [name, password, type, today])
+        cursor.execute(statement, [name, password, "user", today])
         connection.commit()
         cursor.close()
         connection.close()
@@ -186,7 +186,7 @@ class database:
         
         database.delete_comments(self, id, 0)
         database.delete_essays(self, id, 0)
-        database.delete_announcements(self, id, 0)
+        database.delete_announcements(self,id,0)
         
         statement = """DELETE FROM PERSON
                         WHERE ( PERSON_ID = (%(id)s) )           

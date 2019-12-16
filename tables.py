@@ -98,7 +98,7 @@ class database:
     ######### PERSON METHODS ##########
 
     def create_person(self, name, password, type = 'user'):
-        connection = dbapi2.connect(dsn)
+        connection = dbapi2.connect(url)
         cursor = connection.cursor()
         
         today = datetime.today()

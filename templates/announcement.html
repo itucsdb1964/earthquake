@@ -1,21 +1,25 @@
 {% extends "layout.html" %}
 {% block title %}Announcement list{% endblock %}
 {% block content %}
-    <h1 class="title">Announcements</h1>
+    <h1 class="title">Comments</h1>
 
     {% if announcements %}
-    <table class="d-inline-block">
+    <form action="" method="post" name="announcement_list">
+      <table class="table is-striped is-fullwidth">
       {% for announcement in announcements %}
-        {% for item in announcement %}
-        <tr class="d-inline-block">
-            <td class="d-inline-block">
-                <label class="checkbox">
-                    <input type="checkbox" name="announcement" value="{{ announcement }}"/>
-                </label>
-            {{ item }}
+        <tr>
+            <td>
+              {% if current_user.username == announcement[0] or current_user.is_admin %}
+              <label class="checkbox" >
+                  <input type="checkbox" name="deletes" value="{{ announcement[2] }}"/>
+              </label>
+                {% endif %}
+                  {{announcement[3]}}
+                  {{announcement[0]}}
+                  {{announcement[1]}}
+                  {{announcement[2]}}
             </td>
         </tr>
-        {% endfor %}
       {% endfor %}
       <div class="field is-grouped">
         <div class="control">
@@ -23,5 +27,6 @@
         </div>
       </div>
     </table>
+  </form>
     {% endif %}
 {% endblock %}

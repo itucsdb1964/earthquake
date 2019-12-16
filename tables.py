@@ -1,15 +1,14 @@
 import psycopg2 as dbapi2
 from datetime import datetime
 
-dsn = """user='postgres' password='1864'
-         host='localhost' port=5432 dbname='postgres'"""
+url = "postgres://ysgegrjn:ootmjPwTp-y8BaY1tPlyaVy-vTxDJDm_@rajje.db.elephantsql.com:5432/ysgegrjn"
 
 class database:
     def __init__(self):
         self.is_a_try = 1
 
     def delete_all(self):
-        connection = dbapi2.connect(dsn)
+        connection = dbapi2.connect(url)
         cursor = connection.cursor()
         
         statement = """
@@ -28,7 +27,7 @@ class database:
 
 
     def create_tables(self):
-        connection = dbapi2.connect(dsn)
+        connection = dbapi2.connect(url)
         cursor = connection.cursor()
         # old earthquake tables will be added
         statement = """CREATE TABLE PERSON(
@@ -99,7 +98,7 @@ class database:
     ######### PERSON METHODS ##########
 
     def create_person(self, name, password):
-        connection = dbapi2.connect(dsn)
+        connection = dbapi2.connect(url)
         cursor = connection.cursor()
         
         today = datetime.today()
@@ -115,7 +114,7 @@ class database:
         return
 
     def get_password(self, name):
-        connection = dbapi2.connect(dsn)
+        connection = dbapi2.connect(url)
         cursor = connection.cursor()
         
         statement = """SELECT PASSWORD FROM PERSON
@@ -128,7 +127,7 @@ class database:
         return password
 
     def get_type(self, name):
-        connection = dbapi2.connect(dsn)
+        connection = dbapi2.connect(url)
         cursor = connection.cursor()
         
         statement = """SELECT TYPE FROM PERSON
@@ -144,7 +143,7 @@ class database:
         return is_admin
 
     def get_user_id(self, name):
-        connection = dbapi2.connect(dsn)
+        connection = dbapi2.connect(url)
         cursor = connection.cursor()
         
         statement = """SELECT PERSON_ID FROM PERSON
@@ -157,7 +156,7 @@ class database:
         return user_id
 
     def get_person(self, id):
-        connection = dbapi2.connect(dsn)
+        connection = dbapi2.connect(url)
         cursor = connection.cursor()
         
         statement = """SELECT NAME FROM PERSON
@@ -170,7 +169,7 @@ class database:
         return person
 
     def get_people(self):
-        connection = dbapi2.connect(dsn)
+        connection = dbapi2.connect(url)
         cursor = connection.cursor()
         
         statement = """SELECT PASSWORD, NAME, PERSON_DATE FROM PERSON           
@@ -182,7 +181,7 @@ class database:
         return people
 
     def delete_person(self,id):
-        connection = dbapi2.connect(dsn)
+        connection = dbapi2.connect(url)
         cursor = connection.cursor()
         
         database.delete_comments(self, id, 0)
@@ -204,7 +203,7 @@ class database:
     ####### COMMENT METHODS ##########
 
     def create_comment(self, header, comment, which):
-        connection = dbapi2.connect(dsn)
+        connection = dbapi2.connect(url)
         cursor = connection.cursor()
 
         today = datetime.today()
@@ -219,7 +218,7 @@ class database:
         return
 
     def delete_comments(self, id, check):
-        connection = dbapi2.connect(dsn)
+        connection = dbapi2.connect(url)
         cursor = connection.cursor()
         
         if(check == 0):
@@ -240,7 +239,7 @@ class database:
         return
 
     def get_comment(self, id):
-        connection = dbapi2.connect(dsn)
+        connection = dbapi2.connect(url)
         cursor = connection.cursor()
 
         statement = """SELECT * FROM COMMENTS
@@ -255,7 +254,7 @@ class database:
         return comments
     
     def get_comments(self):
-        connection = dbapi2.connect(dsn)
+        connection = dbapi2.connect(url)
         cursor = connection.cursor()
 
         statement = """SELECT COMMENT_WHICH_ID, COMMENT_TOPIC, COMMENT, COMMENT_DATE FROM COMMENTS
@@ -269,7 +268,7 @@ class database:
         return comments
         
     def get_comment_id(self, comment):
-        connection = dbapi2.connect(dsn)
+        connection = dbapi2.connect(url)
         cursor = connection.cursor()
 
         statement = """SELECT COMMENT_ID FROM COMMENTS
@@ -288,7 +287,7 @@ class database:
     ##### ANNOUNCEMENT METHODS ####
 
     def create_announcement(self,header,announcement,which):
-        connection = dbapi2.connect(dsn)
+        connection = dbapi2.connect(url)
         cursor = connection.cursor()
 
         statement = """ INSERT INTO ANNOUNCEMENTS (ANNOUNCEMENT_HEADER, ANNOUNCEMENT, ANNOUNCEMENT_WHICH_ID)
@@ -301,7 +300,7 @@ class database:
         return
 
     def get_announcement(self):
-        connection = dbapi2.connect(dsn)
+        connection = dbapi2.connect(url)
         cursor = connection.cursor()
 
         statement = """SELECT ANNOUNCEMENT_WHICH_ID,ANNOUNCEMENT_HEADER, ANNOUNCEMENT, ANNOUNCEMENT_DATE FROM ANNOUNCEMENTS
@@ -315,7 +314,7 @@ class database:
         return announcements
 
     def delete_announcements(self, id, check):
-        connection = dbapi2.connect(dsn)
+        connection = dbapi2.connect(url)
         cursor = connection.cursor()
         
         if(check == 0):
@@ -336,7 +335,7 @@ class database:
         return
     
     def get_announcement_id(self, announcement):
-        connection = dbapi2.connect(dsn)
+        connection = dbapi2.connect(url)
         cursor = connection.cursor()
 
         statement = """SELECT ANNOUNCEMENT_ID FROM ANNOUNCEMENTS
@@ -357,7 +356,7 @@ class database:
     ######## ESSAY METHODS ########
 
     def create_essay(self, header, essay, which):
-        connection = dbapi2.connect(dsn)
+        connection = dbapi2.connect(url)
         cursor = connection.cursor()
         
         statement = """INSERT INTO ESSAYS (ESSAY_HEADER, ESSAY, ESSAY_WHICH_ID)
@@ -370,7 +369,7 @@ class database:
         return
 
     def delete_essays(self, id, check):
-        connection = dbapi2.connect(dsn)
+        connection = dbapi2.connect(url)
         cursor = connection.cursor()
         
         if(check == 0):
@@ -392,7 +391,7 @@ class database:
 
 
     def get_essay(self):
-        connection = dbapi2.connect(dsn)
+        connection = dbapi2.connect(url)
         cursor = connection.cursor()
 
         statement = """SELECT ESSAY_WHICH_ID,ESSAY_HEADER, ESSAY, ESSAY_DATE FROM ESSAYS
@@ -406,7 +405,7 @@ class database:
         return essays
     
     def get_essay_id(self, essay):
-        connection = dbapi2.connect(dsn)
+        connection = dbapi2.connect(url)
         cursor = connection.cursor()
 
         statement = """SELECT ESSAY_ID FROM ESSAYS
@@ -422,7 +421,7 @@ class database:
 
 
    # def get_essay(self, id, check):
-    #    connection = dbapi2.connect(dsn)
+    #    connection = dbapi2.connect(url)
      #   cursor = connection.cursor()
 
 #        if(check == 0):
@@ -445,7 +444,7 @@ class database:
     ######### earthquakes #############
 
     def create_earthquakes(self, file):
-        connection = dbapi2.connect(dsn)
+        connection = dbapi2.connect(url)
         cursor = connection.cursor()
 
         with open(file, 'r')as file:
@@ -459,7 +458,7 @@ class database:
         return
 
     def get_earthquakes(self, id, check):
-        connection = dbapi2.connect(dsn)
+        connection = dbapi2.connect(url)
         cursor = connection.cursor()
 
         if(check == 0):
@@ -478,7 +477,7 @@ class database:
         return earthquakes
 
     def create_earthquake(self, agency, date_time, latitude, longtitude, depth, kind, magnitude,  rms = '-',country = '-', city = '-', village = '-', other1 = '-', other2 = '-', other3='-'):
-        connection = dbapi2.connect(dsn)
+        connection = dbapi2.connect(url)
         cursor = connection.cursor()
             
         statement = """INSERT INTO EARTHQUAKES (AGENCY, DATE_TIME, LATITUDE, LONGITUDE, DEPTH, RMS, KIND, MAGNITUDE, COUNTR, CITY, VILLAGE, OTHER1, OTHER2, OTHER3)
@@ -492,7 +491,7 @@ class database:
         return
 
     def delete_earthquake(self, id):
-        connection = dbapi2.connect(dsn)
+        connection = dbapi2.connect(url)
         cursor = connection.cursor()
         
         statement = """DELETE FROM EARTHQUAKES

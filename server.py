@@ -25,7 +25,6 @@ def create_app():
     app.add_url_rule("/signup", view_func=views.signup_page, methods=["GET", "POST"])
     app.add_url_rule("/login", view_func=views.login_page, methods=["GET", "POST"])
     app.add_url_rule("/logout", view_func=views.logout_page)
-    app.add_url_rule("/deletecomment", view_func=views.delete_comment_page)
     app.add_url_rule("/makecomment", view_func=views.make_comment_page,methods=["GET", "POST"])
     app.add_url_rule("/comments", view_func=views.comments_page)
     app.add_url_rule("/earthquakes", view_func=views.earthquakes_page)

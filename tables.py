@@ -476,4 +476,32 @@ class database:
         cursor.close()
         connection.close()
         return earthquakes
+
+    def create_earthquake(self, agency, date_time, latitude, longtitude, depth, kind, magnitude,  rms = '-',country = '-', city = '-', village = '-', other1 = '-', other2 = '-', other3='-'):
+        connection = dbapi2.connect(dsn)
+        cursor = connection.cursor()
+            
+        statement = """INSERT INTO EARTHQUAKES (AGENCY, DATE_TIME, LATITUDE, LONGITUDE, DEPTH, RMS, KIND, MAGNITUDE, COUNTR, CITY, VILLAGE, OTHER1, OTHER2, OTHER3)
+                            VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                            """          
+                                
+        cursor.execute(statement, [agency, date_time, latitude, longtitude, depth, rms, kind, magnitude, country, city, village, other1, other2, other3])
+        connection.commit()
+        cursor.close()
+        connection.close()
+        return
+
+    def delete_earthquake(self, id):
+        connection = dbapi2.connect(dsn)
+        cursor = connection.cursor()
+        
+        statement = """DELETE FROM EARTHQUAKES
+                        WHERE ( EVENTID = (%(id)s) )
+                        """
+
+        cursor.execute(statement, {'id' : id})
+        connection.commit()
+        cursor.close()
+        connection.close()
+        return
         

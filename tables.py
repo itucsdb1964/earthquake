@@ -314,6 +314,42 @@ class database:
         connection.close()
         return announcements
 
+    def delete_announcements(self, id, check):
+        connection = dbapi2.connect(dsn)
+        cursor = connection.cursor()
+        
+        if(check == 0):
+            statement = """DELETE FROM ANNOUNCEMENTS
+                        WHERE ( ANNOUNCEMENT_WHICH_ID = (%(id)s) )           
+                            """
+        #### With this statement, we can delete a spesific user's all comments. Useful when an account gets deleted.
+        else:
+            statement = """DELETE FROM ANNOUNCEMENTS
+                        WHERE ( ANNOUNCEMENT_ID = (%(id)s) )           
+                            """                
+        #### With this statement, we can delete a specific comment.
+
+        cursor.execute(statement, {'id' : id})
+        connection.commit()
+        cursor.close()
+        connection.close()
+        return
+    
+    def get_announcement_id(self, announcement):
+        connection = dbapi2.connect(dsn)
+        cursor = connection.cursor()
+
+        statement = """SELECT ANNOUNCEMENT_ID FROM ANNOUNCEMENTS
+                        WHERE ( ANNOUNCEMENT = (%(id)s) )
+                            """
+
+        cursor.execute(statement, {'id' : announcement})
+        announcement_id = cursor.fetchall()
+        connection.commit()
+        cursor.close()
+        connection.close()
+        return announcement_id
+
     
 
     ###############################
@@ -368,6 +404,21 @@ class database:
         cursor.close()
         connection.close()
         return essays
+    
+    def get_essay_id(self, essay):
+        connection = dbapi2.connect(dsn)
+        cursor = connection.cursor()
+
+        statement = """SELECT ESSAY_ID FROM ESSAYS
+                        WHERE ( ESSAY = (%(id)s) )
+                            """
+
+        cursor.execute(statement, {'id' : essay})
+        essay_id = cursor.fetchall()
+        connection.commit()
+        cursor.close()
+        connection.close()
+        return essay_id
 
 
    # def get_essay(self, id, check):

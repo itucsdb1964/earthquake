@@ -4,15 +4,103 @@
     <h1 class="title">Earthquakes</h1>
 
     {% if earths %}
-    <table class="d-inline-block">
+    <table style="border-collapse: collapse; width: 90%">
+      <tr style="background-color: rgb(127, 240, 123)">
+      <th style="border-bottom: 1px solid rgb(78, 42, 42); text-align: left;  padding: 15px">
+        EVENTID
+    </th>
+    <th style="border-bottom: 1px solid rgb(78, 42, 42); text-align: left;  padding: 15px">
+      AGENCY
+    </th>
+    <th style="border-bottom: 1px solid rgb(78, 42, 42); text-align: left;  padding: 15px">
+      DATE_TIME
+    </th>
+    <th style="border-bottom: 1px solid rgb(78, 42, 42); text-align: left;  padding: 15px">
+      LATITUDE
+      </th>
+      <th style="border-bottom: 1px solid rgb(78, 42, 42); text-align: left;  padding: 15px">
+        LONGITUDE
+        </th>
+        <th style="border-bottom: 1px solid rgb(78, 42, 42); text-align: left;  padding: 15px">
+          DEPTH 
+          </th>
+          <th style="border-bottom: 1px solid rgb(78, 42, 42); text-align: left;  padding: 15px">
+            RMS
+            </th>
+            <th style="border-bottom: 1px solid rgb(78, 42, 42); text-align: left;  padding: 15px">
+              KIND 
+              </th>
+              <th style="border-bottom: 1px solid rgb(78, 42, 42); text-align: left;  padding: 15px">
+                MAGNITUDE
+                </th>
+                <th style="border-bottom: 1px solid rgb(78, 42, 42); text-align: left;  padding: 15px">
+                  COUNTRY
+                  </th>
+                  <th style="border-bottom: 1px solid rgb(78, 42, 42); text-align: left;  padding: 15px">
+                    CITY
+                    </th>
+                    <th style="border-bottom: 1px solid rgb(78, 42, 42); text-align: left;  padding: 15px">
+                      VILLAGE
+                      </th>
+                      <th style="border-bottom: 1px solid rgb(78, 42, 42); text-align: left;  padding: 15px">
+                        OTHER1
+                        </th>
+                        <th style="border-bottom: 1px solid rgb(78, 42, 42); text-align: left;  padding: 15px">
+                          OTHER2
+                          </th>
+                          <th style="border-bottom: 1px solid rgb(78, 42, 42); text-align: left;  padding: 15px">
+                            OTHER3
+                            </th>
+                  </tr>
       {% for e in earths %}
-        {% for item in e %}
-        <tr class="d-inline-block">
-            <td class="d-inline-block">
-            {{ item }}
-            </td>
+        
+        <tr style="background-color: rgb(187, 253, 170)">
+          <td style="border-bottom: 1px solid rgb(78, 42, 42); height: 20px; vertical-align: bottom; padding: 15px; text-align: left">
+            {{ e[0] }}
+          </td>
+          <td style="border-bottom: 1px solid rgb(78, 42, 42); height: 20px; vertical-align: bottom; padding: 15px; text-align: left">
+             {{ e[1] }}
+          </td>
+           <td style="border-bottom: 1px solid rgb(78, 42, 42); height: 20px; vertical-align: bottom; padding: 15px; text-align: left">
+          {{ e[2] }}
+          </td>
+        <td style="border-bottom: 1px solid rgb(78, 42, 42); height: 20px; vertical-align: bottom; padding: 15px; text-align: left">
+        {{ e[3] }}
+       </td>  
+       <td style="border-bottom: 1px solid rgb(78, 42, 42); height: 20px; vertical-align: bottom; padding: 15px; text-align: left">
+        {{ e[4] }}
+        </td>  
+       <td style="border-bottom: 1px solid rgb(78, 42, 42); height: 20px; vertical-align: bottom; padding: 15px; text-align: left">
+        {{ e[5] }}
+        </td> 
+        <td style="border-bottom: 1px solid rgb(78, 42, 42); height: 20px; vertical-align: bottom; padding: 15px; text-align: left">
+        {{ e[6] }}
+          </td>
+         <td style="border-bottom: 1px solid rgb(78, 42, 42); height: 20px; vertical-align: bottom; padding: 15px; text-align: left">
+          {{ e[7] }}
+          </td> 
+         <td style="border-bottom: 1px solid rgb(78, 42, 42); height: 20px; vertical-align: bottom; padding: 15px; text-align: left">
+           {{ e[8] }}
+         </td>
+         <td style="border-bottom: 1px solid rgb(78, 42, 42); height: 20px; vertical-align: bottom; padding: 15px; text-align: left">
+            {{ e[9] }}
+          </td>
+        <td style="border-bottom: 1px solid rgb(78, 42, 42); height: 20px; vertical-align: bottom; padding: 15px; text-align: left">
+         {{ e[10] }}
+         </td>
+       <td style="border-bottom: 1px solid rgb(78, 42, 42); height: 20px; vertical-align: bottom; padding: 15px; text-align: left">
+        {{ e[11] }}
+       </td>
+        <td style="border-bottom: 1px solid rgb(78, 42, 42); height: 20px; vertical-align: bottom; padding: 15px; text-align: left">
+              {{ e[12] }}
+          </td>
+        <td style="border-bottom: 1px solid rgb(78, 42, 42); height: 20px; vertical-align: bottom; padding: 15px; text-align: left">
+            {{ e[13] }}
+          </td>
+        <td style="border-bottom: 1px solid rgb(78, 42, 42)k; height: 20px; vertical-align: bottom; padding: 15px; text-align: left">
+           {{ e[14] }}
+          </td>                                                                                                                                                                                            
         </tr>
-        {% endfor %}
       {% endfor %}
     </table>
     {% endif %}

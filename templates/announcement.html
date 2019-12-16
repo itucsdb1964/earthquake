@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block title %}Announcement list{% endblock %}
+{% block content %}
+    <h1 class="title">Announcements</h1>
+
+    {% if announcements %}
+    <table class="d-inline-block">
+      {% for announcement in announcements %}
+        {% for item in announcement %}
+        <tr class="d-inline-block">
+            <td class="d-inline-block">
+                <label class="checkbox">
+                    <input type="checkbox" name="announcement" value="{{ announcement }}"/>
+                </label>
+            {{ item }}
+            </td>
+        </tr>
+        {% endfor %}
+      {% endfor %}
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-danger is-small">Delete</button>
+        </div>
+      </div>
+    </table>
+    {% endif %}
+{% endblock %}

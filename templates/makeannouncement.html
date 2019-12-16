@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block title %}Edit movie{% endblock %}
+{% block content %}
+    <h1 class="title">Edit movie</h1>
+
+    <form action="" method="post" name="announcement_make">
+      <div class="field">
+        <label for="header" class="label">Header</label>
+        <div class="control">
+          <input type="text" id= "header" name="header" class="input" placeholder= "header" required="required"/>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="announcement" class="label">announcement</label>
+        <div class="control">
+          <input type="text" id= "announcement "name="announcement" class="input" placeholder= "announcement" required= "required"/>
+        </div>
+      </div>
+
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-primary is-small">Save</button>
+        </div>
+      </div>
+    </form>
+{% endblock %}

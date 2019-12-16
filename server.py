@@ -159,10 +159,12 @@ def add_earthquake_page():
 
 @app.route("/signout")
 def signout_page():
+    
     db = current_app.config["db"]
     name = session.get('user_id', 'not set')
     user_id = db.get_user_id(name)
     db.delete_person(user_id[0][0])
+    logout_user()
     flash("You are no longer a user of this site :(")
     return redirect(url_for("home_page"))
 

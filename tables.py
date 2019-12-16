@@ -186,6 +186,7 @@ class database:
         
         database.delete_comments(self, id, 0)
         database.delete_essays(self, id, 0)
+        database.delete_announcements(self, id, 0)
         
         statement = """DELETE FROM PERSON
                         WHERE ( PERSON_ID = (%(id)s) )           

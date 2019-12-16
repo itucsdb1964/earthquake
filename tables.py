@@ -1,7 +1,7 @@
 import psycopg2 as dbapi2
 from datetime import datetime
 
-dsn = """user='postgres' password='1864'
+dsn = """user='postgres' password='muzipos1'
          host='localhost' port=5432 dbname='postgres'"""
 
 class database:

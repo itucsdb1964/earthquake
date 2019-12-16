@@ -47,6 +47,9 @@
               <span class="navbar-item">
                 <a class="button is-link" href="{{ url_for('earthquakes_page') }}">List earthquakes</a>
               </span>
+              <span class="navbar-item">
+                <a class="button is-link" href="{{ url_for('announcements_page') }}">List announcements</a>
+              </span>
               {% if current_user.is_admin %}
               <span class="navbar-item">
                 <a class="button is-link" href="{{ url_for('comments_page') }}">List comments</a>

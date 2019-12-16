@@ -43,21 +43,49 @@ def add_earthquake_page():
         form_date_time = request.form["date_time"]
         form_latitude = request.form["latitude"]
         form_longitude = request.form["longitude"]
-
-        print(form_agency)
-        print(form_date_time)
-        print(form_latitude)
-        print(form_longitude)
+        form_depth = request.form["depth"]
+        form_RMS = request.form["RMS"]
+        form_kind = request.form["kind"]
+        form_magnitude = request.form["magnitude"]
+        form_country = request.form["country"]
+        form_city = request.form["city"]
+        form_village = request.form["village"]
+        form_other1 = request.form["other1"]
+        form_other2 = request.form["other2"]
+        form_other3 = request.form["other3"]
+        if form_country == None:
+            form_country = '-'
+        if form_city == None:
+            form_city = '-'
+        if form_village == None:
+            form_village = '-'
+        if form_other1 == None:
+            form_other1 = '-'
+        if form_other2 == None:
+            form_other2 = '-'
+        if form_other3 == None:
+            form_other3 = '-'
+        
+        db = current_app.config["db"]
+        db.create_earthquake(form_agency, form_date_time, form_latitude, form_longitude, form_depth, form_kind, form_magnitude, form_RMS, form_country, form_city, form_village, form_other1, form_other2, form_other3)
+        flash("Earthquake has been added successfully :)")
         return redirect(url_for("add_earthquake_page"))
 
 def earthquakes_page():
     db = current_app.config["db"]
-    earths = db.get_earthquakes(0, 0)
-    i = 0
-    for earth in earths:
-        earths[i] = list(earths[i])
-        i = i + 1
-    return render_template("earthquakes.html", earths = earths)
+    if request.method == "GET":
+        earths = db.get_earthquakes(0, 0)
+        i = 0
+        for earth in earths:
+            earths[i] = list(earths[i])
+            i = i + 1
+        return render_template("earthquakes.html", earths = earths)
+    else:
+        form_earth_keys = request.form.getlist("deletes")
+        for form_earth_key in form_earth_keys:
+            db.delete_earthquake(form_earth_key)
+        flash("You deleted some of the earthquakes")
+        return redirect(url_for("earthquakes_page"))
 
 ####################################
 ####### announcements pages ########

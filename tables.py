@@ -1,7 +1,7 @@
 import psycopg2 as dbapi2
 from datetime import datetime
 
-dsn = """user='postgres' password='muzipos1'
+dsn = """user='postgres' password='1864'
          host='localhost' port=5432 dbname='postgres'"""
 
 class database:
@@ -267,6 +267,21 @@ class database:
         cursor.close()
         connection.close()
         return comments
+        
+    def get_comment_id(self, comment):
+        connection = dbapi2.connect(dsn)
+        cursor = connection.cursor()
+
+        statement = """SELECT COMMENT_ID FROM COMMENTS
+                        WHERE ( COMMENT = (%(id)s) )
+                            """
+
+        cursor.execute(statement, {'id' : comment})
+        comment_id = cursor.fetchall()
+        connection.commit()
+        cursor.close()
+        connection.close()
+        return comment_id
 
     ###############################
 

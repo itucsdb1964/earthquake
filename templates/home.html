@@ -19,11 +19,19 @@
       .vertical-menu a:hover {
         background-color: #ccc;
       }
+      .vertical-menu{
+        font-size: 20px;
+      }
+      .referans{
+        position: fixed;
+        bottom: 0px;
+        right: 0px;
+        font-size:16px;
+      }
     </style>      
   </head>
   <body>
     <h1>TODAY: {{ day }}<h1>
-    <p>Recent Earthquakessss:{{aaa}}</p>
     <div class="vertical-menu">
         <ul>
       <li><a href="/comments">List comments</a></li>
@@ -42,6 +50,9 @@
       
 
     </ul>
+  </div>
+  <div class="referans">
+    <p>Reference for initial earthquake data : <a href="https://deprem.afad.gov.tr/sondepremler">AFAD</a></p>
   </div>
   </body>
 </html>   

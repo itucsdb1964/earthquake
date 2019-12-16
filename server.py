@@ -31,9 +31,9 @@ def create_app():
     app.add_url_rule("/new_earthquake", view_func=views.add_earthquake_page, methods=["GET", "POST"])
     app.add_url_rule("/signout", view_func=views.signout_page)
     app.add_url_rule("/makeessay", view_func=views.make_essay_page,methods=["GET", "POST"])
-    app.add_url_rule("/essays", view_func=views.essays_page)
+    app.add_url_rule("/essays", view_func=views.essays_page, methods=["GET","POST"])
     app.add_url_rule("/makeannouncement", view_func=views.make_announcement_page,methods=["GET", "POST"])
-    app.add_url_rule("/announcements", view_func=views.announcements_page)
+    app.add_url_rule("/announcements", view_func=views.announcements_page, methods=["GET","POST"])
     
     
 

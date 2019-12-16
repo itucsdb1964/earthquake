@@ -1,21 +1,25 @@
 {% extends "layout.html" %}
 {% block title %}Essay list{% endblock %}
 {% block content %}
-    <h1 class="title">Essays</h1>
+    <h1 class="title">Comments</h1>
 
     {% if essays %}
-    <table class="d-inline-block">
+    <form action="" method="post" name="essay_list">
+      <table class="table is-striped is-fullwidth">
       {% for essay in essays %}
-        {% for item in essay %}
-        <tr class="d-inline-block">
-            <td class="d-inline-block">
-                <label class="checkbox">
-                    <input type="checkbox" name="essay" value="{{ essay }}"/>
-                </label>
-            {{ item }}
+        <tr>
+            <td>
+              {% if current_user.username == essay[0] or current_user.is_admin %}
+              <label class="checkbox" >
+                  <input type="checkbox" name="deletes" value="{{ essay[2] }}"/>
+              </label>
+                {% endif %}
+                  {{essay[3]}}
+                  {{essay[0]}}
+                  {{essay[1]}}
+                  {{essay[2]}}
             </td>
         </tr>
-        {% endfor %}
       {% endfor %}
       <div class="field is-grouped">
         <div class="control">
@@ -23,5 +27,6 @@
         </div>
       </div>
     </table>
+  </form>
     {% endif %}
 {% endblock %}

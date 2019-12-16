@@ -9,7 +9,7 @@
       {% for comment in comments %}
         <tr>
             <td>
-              {% if current_user.username == comment[0] %}
+              {% if current_user.username == comment[0] or current_user.is_admin %}
               <label class="checkbox" >
                   <input type="checkbox" name="deletes" value="{{ comment[2] }}"/>
               </label>

@@ -4,14 +4,14 @@ Developer Guide
 Database Design
 ---------------
 
-**explain the database design of your project**
+**We have 6 tables. 2 of them saves earthquake data's and 4 of them includes person,comments,essays,announcements.Person includes user's data which has logged in the application. Comments,essays and announcements are the data which can be submitted by users.**
 
-**include the E/R diagram(s)**
+
 
 Code
 ----
 
-**explain the technical structure of your code**
+**Technical structure is depending on flask.We have sql queries in tables.py and we implemented operations in server.app. In that implementation we used the functions in tables.py and made changes in our database persistently. We used elephantsql for this**
 
 **to include a code listing, use the following example**::
 

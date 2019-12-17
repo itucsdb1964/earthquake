@@ -11,7 +11,7 @@ Database Design
 Code
 ----
 
-**Technical structure is depending on flask.We have sql queries in tables.py and we implemented operations in server.app. In that implementation we used the functions in tables.py and made changes in our database persistently. We used elephantsql for this**
+**Technical structure is depending on flask.We have sql queries in tables.py and we implemented operations in server.app. In that implementation we used the functions in tables.py and made changes in our database persistently. We used elephantsql for this.**
 
 **to include a code listing, use the following example**::
 

@@ -1,8 +1,7 @@
 User Guide
 ==========
 
-**explain how your application works from the user perspective, use
-screenshots whereever appropriate**
+**A user can easily sign up and login to website. After that he/she can easily observe recent earthquakes, some announcements about website. Also he/she can submit some comments and essays about earthquake experiences, guesses and also website. We specially wanted some expert users to submit formal essays about earthquakes. **
 
 **to add a picture, use the following example**::
 

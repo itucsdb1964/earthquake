@@ -1,17 +1,20 @@
-Welcome to itucsdbNN's documentation!
+Welcome to itucsdb1964's documentation!
 =====================================
 
-:Team: Team Name
+:Team: Earthquake
 
 :Members:
 
-   * Member 1
-   * Member 2
+   * Member 1 : Mehmet Fatih Teloğlu
+   * Member 2 : Zeynep Gürler
    * Member 3
    * Member 4
    * Member 5
 
-**project description goes here (a few paragraphs)**
+**
+It is a project about displaying previous earthquakes and providing a platform for disgussing, generating new ideas, 
+giving a deserving attention to earthquake problem.  
+**
 
 Contents:
 

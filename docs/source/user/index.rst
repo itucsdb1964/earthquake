@@ -10,6 +10,14 @@ A user can easily sign up and login to website. After that he/she can easily obs
       :alt: map to buried treasure
 
       This is the caption of the figure (a simple paragraph).
+      
+   .. figure:: earthquake.png
+      :scale: 50 %
+      :alt: map to buried treasure
+
+      Interface of listing earthquakes.
+      
+ 
 
 .. toctree::
 

@@ -9,7 +9,7 @@ A user can easily sign up and login to website. After that he/she can easily obs
 
       Interface of listing earthquakes(Ref : AFAD).
       
-To add or observe anything, you just need to click to related tab in the menu.
+To add or observe anything, it is just needed to click to related tab in the menu.
 
    .. figure:: mainmenu.png
       :scale: 50 %
@@ -17,7 +17,13 @@ To add or observe anything, you just need to click to related tab in the menu.
 
       Main menu.
       
+ Of course, user should login first to add comment and essay.
  
+ .. figure:: loginpage.png
+      :scale: 50 %
+      :alt: map to buried treasure
+
+      Login page.
 
 .. toctree::
 

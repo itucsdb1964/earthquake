@@ -18,7 +18,7 @@ To add or observe anything, it is just needed to click to related tab in the men
       Main menu.
       
       
- Of course, user should login first to add comment and essay.
+Of course, user should login first to add comment and essay.
  
  .. figure:: loginpage.png
       :scale: 50 %

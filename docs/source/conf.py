@@ -102,7 +102,7 @@ html_static_path = ['_static']
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'ITUCSDB18NNdoc'
+htmlhelp_basename = 'ITUCSDB1964doc'
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -110,11 +110,11 @@ htmlhelp_basename = 'ITUCSDB18NNdoc'
 latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
     #
-    # 'papersize': 'letterpaper',
+     'papersize': 'a4paper',
 
     # The font size ('10pt', '11pt' or '12pt').
     #
-    # 'pointsize': '10pt',
+     'pointsize': '10pt',
 
     # Additional stuff for the LaTeX preamble.
     #
@@ -122,15 +122,16 @@ latex_elements = {
 
     # Latex figure (float) alignment
     #
-    # 'figure_align': 'htbp',
+     'figure_align': 'H',
+     'extraclassoptions': 'openany,oneside', # to remove the blank pages.
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'ITUCSDB18NN.tex', 'ITUCSDB18NN Documentation',
-     'ITUCSDB18NN', 'manual'),
+    (master_doc, 'ITUCSDB1964.tex', 'ITUCSDB1964 Documentation',
+     'ITUCSDB1964', 'manual'),
 ]
 
 
@@ -150,8 +151,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'ITUCSDB18NN', 'ITUCSDB18NN Documentation',
-     author, 'ITUCSDB18NN', 'One line description of project.',
+    (master_doc, 'ITUCSDB1964', 'ITUCSDB1964 Documentation',
+     author, 'ITUCSDB1964', 'Earthquake Project',
      'Miscellaneous'),
 ]
 

@@ -17,16 +17,24 @@ We have 6 tables. 2 of them saves earthquake data's and 4 of them includes perso
 Code
 ----
 
-**Technical structure is depending on flask.We have sql queries in tables.py and we implemented operations in server.app. In that implementation we used the functions in tables.py and made changes in our database persistently. We used elephantsql for this.**
+Technical structure is depending on flask.We have sql queries in tables.py and we implemented operations in server.app. In that implementation we used the functions in tables.py and made changes in our database persistently. We used elephantsql for this.
 
-**to include a code listing, use the following example**::
 
    .. code-block:: python
 
-      class Foo:
-
-         def __init__(self, x):
-            self.x = x
+   @app.route("/signup",methods=["GET", "POST"])
+   def signup_page():
+       form = LoginForm()
+       if form.validate_on_submit():
+           username = form.data["username"]
+           password = form.data["password"]
+           next_page = request.args.get("next", url_for("login_page"))
+           db = current_app.config["db"]
+           db.create_person(username, pbkdf2_sha256.hash(password))
+           flash("You signed up, you can enjoy our website now :)")
+           return redirect(next_page)
+       flash("Invalid credentials.")
+       return render_template("signup.html", form=form)
 
 .. toctree::
 

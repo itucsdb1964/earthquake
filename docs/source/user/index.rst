@@ -26,6 +26,13 @@ Of course, user should login first to add comment and essay.
 
       Login page.
 
+ .. figure:: loggedin.png
+      :scale: 50 %
+      :alt: map to buried treasure
+
+  
+  
+
 .. toctree::
 
    member1

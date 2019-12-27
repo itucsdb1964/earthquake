@@ -176,10 +176,4 @@ epub_exclude_files = ['search.html']
 
 # -- Extension configuration -------------------------------------------------
 
-extensions = ['rst2pdf.pdfbuilder']
 
-pdf_documents = [('index', u'Documentation of itucsdb1964', u'Documentation', u'mfteloglu'),]
-  # index - master document
-  # rst2pdf - name of the generated pdf
-  # Sample rst2pdf doc - title of the pdf
-  # Your Name - author name in the pdf

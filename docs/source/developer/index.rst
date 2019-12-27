@@ -4,7 +4,13 @@ Developer Guide
 Database Design
 ---------------
 
-**We have 6 tables. 2 of them saves earthquake data's and 4 of them includes person,comments,essays,announcements.Person includes user's data which has logged in the application. Comments,essays and announcements are the data which can be submitted by users.**
+We have 6 tables. 2 of them saves earthquake data's and 4 of them includes person,comments,essays,announcements.Person includes user's data which has logged in the application. Comments,essays and announcements are the data which can be submitted by users.
+
+   .. figure:: diagram.png
+      :scale: 50 %
+      :alt: map to buried treasure
+
+      Database diagram.
 
 
 

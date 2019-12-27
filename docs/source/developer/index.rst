@@ -48,6 +48,4 @@ Like it is mentioned, tables.py has functions that makes necessary changes in da
 
    member1
    member2
-   member3
-   member4
-   member5
+ 

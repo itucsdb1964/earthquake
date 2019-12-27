@@ -19,24 +19,14 @@ Code
 
 Technical structure is depending on flask.We have sql queries in tables.py and we implemented operations in server.app. In that implementation we used the functions in tables.py and made changes in our database persistently. We used elephantsql for this.
 
-As an example, here is the code for login page. It checks the username and password and directs to related html part.
+As an example, here is the code for login page and signup page.
 
-.. code-block:: python
-      @app.route("/login",methods=["GET", "POST"])
-      def login_page():
-          form = LoginForm()
-          if form.validate_on_submit():
-              username = form.data["username"]
-              user = get_user(username)
-              if user is not None:
-                  password = form.data["password"]
-                  if pbkdf2_sha256.verify(password, user.password[0][0] ):
-                      login_user(user)
-                      flash("You have logged in.")
-                      next_page = request.args.get("next", url_for("home_page"))
-                      return redirect(next_page)
-              flash("Invalid credentials.")
-          return render_template("login.html", form=form)
+   .. figure:: codeexample.png
+      :scale: 50 %
+      :alt: map to buried treasure
+
+      This is the caption of the figure (a simple paragraph).
+
           
         
 

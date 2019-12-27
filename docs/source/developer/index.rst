@@ -21,20 +21,20 @@ Technical structure is depending on flask.We have sql queries in tables.py and w
 
 
    .. code-block:: python
-   class Foo:
-      @app.route("/signup",methods=["GET", "POST"])
-      def signup_page():
-          form = LoginForm()
-          if form.validate_on_submit():
-              username = form.data["username"]
-              password = form.data["password"]
-              next_page = request.args.get("next", url_for("login_page"))
-              db = current_app.config["db"]
-              db.create_person(username, pbkdf2_sha256.hash(password))
-              flash("You signed up, you can enjoy our website now :)")
-              return redirect(next_page)
-          flash("Invalid credentials.")
-          return render_template("signup.html", form=form)
+      class Foo:
+         @app.route("/signup",methods=["GET", "POST"])
+         def signup_page():
+             form = LoginForm()
+             if form.validate_on_submit():
+                 username = form.data["username"]
+                 password = form.data["password"]
+                 next_page = request.args.get("next", url_for("login_page"))
+                 db = current_app.config["db"]
+                 db.create_person(username, pbkdf2_sha256.hash(password))
+                 flash("You signed up, you can enjoy our website now :)")
+                 return redirect(next_page)
+             flash("Invalid credentials.")
+             return render_template("signup.html", form=form)
 
 .. toctree::
 
